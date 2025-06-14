@@ -9,7 +9,6 @@
 - **Sistema Operativo:** Linux
 - **Categoría:** Escalada de privilegios
 
----
 
 ## 📝 Descripción
 
@@ -27,7 +26,6 @@ Esta máquina es especialmente útil para:
 
 > Identificar binarios con permisos indebidos en sistemas Linux
 
----
 
 ## 🔍 Enumeración
 
