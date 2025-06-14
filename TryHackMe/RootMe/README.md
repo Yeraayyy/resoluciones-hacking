@@ -1,9 +1,6 @@
 # Resolución de la Máquina: RootMe
 ---
 
-```
-
-```
 # 🧰 Resolución: RootMe
 
 - **Plataforma:** TryHackMe
@@ -23,13 +20,13 @@ Durante la resolución, el atacante debe identificar una vulnerabilidad web com�
 
 Esta máquina es especialmente útil para:
 
-    Practicar enumeración web y de servicios básicos
+> Practicar enumeración web y de servicios básicos
 
-    Comprender cómo aprovechar inyecciones simples o ejecución remota de comandos
+> Comprender cómo aprovechar inyecciones simples o ejecución remota de comandos
 
-    Aplicar técnicas básicas de post-explotación
+> Aplicar técnicas básicas de post-explotación
 
-    Identificar binarios con permisos indebidos en sistemas Linux
+> Identificar binarios con permisos indebidos en sistemas Linux
 
 ---
 
