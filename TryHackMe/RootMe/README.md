@@ -1,5 +1,4 @@
 # Resolución de la Máquina: RootMe
----
 
 # 🧰 Resolución: RootMe
 
