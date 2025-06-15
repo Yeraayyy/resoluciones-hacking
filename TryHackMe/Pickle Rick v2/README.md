@@ -1,4 +1,4 @@
-# Resolución de la Máquina: RootMe
+# Resolución de la Máquina: Pickle Rick
 
 - **Plataforma:** TryHackMe
 - **Dificultad:** Fácil
