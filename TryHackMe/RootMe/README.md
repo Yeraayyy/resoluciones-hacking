@@ -1,7 +1,5 @@
 # Resolución de la Máquina: RootMe
 
-# Resolución: RootMe
-
 - **Plataforma:** TryHackMe
 - **Dificultad:** Fácil
 - **Fecha de resolución:** 14/06/2025
