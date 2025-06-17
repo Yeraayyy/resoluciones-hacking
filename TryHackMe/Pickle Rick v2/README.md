@@ -4,7 +4,6 @@
 - **Dificultad:** Fácil
 - **Fecha de resolución:** 15/06/2025
 - **Sistema Operativo:** Linux
-- **Categoría:** 
 
 
 ## Descripción
