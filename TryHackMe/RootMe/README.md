@@ -4,7 +4,6 @@
 - **Dificultad:** Fácil
 - **Fecha de resolución:** 14/06/2025
 - **Sistema Operativo:** Linux
-- **Categoría:** Escalada de privilegios
 
 
 ## Descripción
