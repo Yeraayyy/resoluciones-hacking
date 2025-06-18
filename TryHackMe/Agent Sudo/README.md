@@ -138,4 +138,4 @@ Accederemos mediante ssh con estas credenciales.
 
 ## Escalada de privilegios
 Realizando un sudo -l podemos ver que podemos ejecutar /bin/bash como sudo.
-Una búsqueda en google nos muestra como podemos aprovechar sudo -u#-1 /bin/bash, ejecutando `bash sudo -u#-1 /bin/bash` podremos acceder al usuario root.
+Una búsqueda en google nos muestra como podemos aprovechar sudo -u#-1 /bin/bash, ejecutando `sudo -u#-1 /bin/bash` podremos acceder al usuario root.
