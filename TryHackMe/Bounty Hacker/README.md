@@ -1,3 +1,5 @@
+# Resolución de la Máquina: Bounty Hacker
+
 - **Plataforma:** TryHackMe
 - **Dificultad:** Fácil
 - **Fecha de resolución:** 23/06/2025
