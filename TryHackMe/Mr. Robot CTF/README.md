@@ -20,3 +20,11 @@ Esta máquina es especialmente útil para:
 > Ganancia de acceso inicial (low privilege shell)
 
 > Escalada de privilegios mediante binarios SUID mal configurados
+
+## Enumeración
+
+### Escaneo con Nmap
+
+```bash
+
+```
