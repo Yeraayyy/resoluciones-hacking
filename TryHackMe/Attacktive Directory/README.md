@@ -1,12 +1,9 @@
-Resolución de la Máquina: Attacktive Directory
+# Resolución de la Máquina: Attacktive Directory
 
-**-Plataforma:** TryHackMe
-
-**-Dificultad:** Media
-
-**-Fecha de resolución:** 18/06/2025
-
- **-Sistema Operativo:** Windows
+- **Plataforma:** TryHackMe
+- **Dificultad:** Media
+- **Fecha de resolución:** 07/07/2025
+- **Sistema Operativo:** Windows Server
 
 Descripción
 
