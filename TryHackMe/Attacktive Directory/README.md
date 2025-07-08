@@ -491,3 +491,4 @@ Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplay
 Info: Establishing connection to remote endpoint
 *Evil-WinRM* PS C:\Users\Administrator\Documents>
 ```
+Finalmente encontraremos los flags en el escritorio de los usuarios.
