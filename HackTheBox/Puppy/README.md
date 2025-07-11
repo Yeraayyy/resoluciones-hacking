@@ -1,11 +1,7 @@
-```bash
-en samba habia politicas que se han estado analizando
-```
+Nos proporcionaran las credenciales del usuario levi.james, procederemos a enumerar los usuarios mediante rpcclient, posteriormente los almacenaremos en un txt por si posteriormente lo necesitamos.
 ```bash
 └─# rpcclient -U levi.james%KingofAkron2025! -W puppy.htb 10.10.11.70
-
-
-```rpcclient $> enumdomusers
+rpcclient $> enumdomusers
 user:[Administrator] rid:[0x1f4]
 user:[Guest] rid:[0x1f5]
 user:[krbtgt] rid:[0x1f6]
@@ -16,11 +12,16 @@ user:[jamie.williams] rid:[0x452]
 user:[steph.cooper] rid:[0x453]
 user:[steph.cooper_adm] rid:[0x457]
 ```
+
+Ahora sincronizaremos la hora con el dominio para evitar posibles problemas, es importante tener la IP apuntando correctamente al dominio en el fichero /etc/hosts
 ```bash
 └─# ntpdate puppy.htb
 2025-07-11 13:06:14.736452 (-0400) +25200.486878 +/- 0.026779 puppy.htb 10.10.11.70 s1 no-leap
 CLOCK: time stepped by 25200.486878
-                                                                                                                                                                                                                                           
+```
+
+Generearemos un archivo que podamos visualizar en bloodhound
+```bash                                                                                                                                                                                                                                           
 ┌──(root㉿kali)-[~/THM/Puppy]
 └─# bloodhound-python -u 'levi.james' -p 'KingofAkron2025!'  -d puppy.htb -ns 10.10.11.70 -c All --zip
 INFO: BloodHound.py for BloodHound LEGACY (BloodHound 4.2 and 4.3)
@@ -43,6 +44,11 @@ INFO: Querying computer: DC.PUPPY.HTB
 INFO: Done in 00M 11S
 INFO: Compressing output into 20250711060801_bloodhound.zip
 ```
+Si recordamos cuando enumeramos los directorios de smb uno de ellos nos decia que 
+
+<img width="1920" height="966" alt="image" src="https://github.com/user-attachments/assets/6ca36421-4f29-4e29-bc17-0f20ca53d21e" />
+
+
 ```bash
 └─# ldapsearch -x -H ldap://puppy.htb -D "puppy\\levi.james" -w 'KingofAkron2025!' -b "DC=puppy,DC=htb" "(sAMAccountName=levi.james)"
 # extended LDIF
