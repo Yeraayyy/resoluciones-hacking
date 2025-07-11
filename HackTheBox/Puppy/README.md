@@ -215,3 +215,18 @@ result: 0 Success
 # numResponses: 2
 # numEntries: 1
 ```
+Ahora veremos que tenemos acceso a la carpeta DEV, procederemos a descargar su contenido.
+```bash
+└─# smbclient  //puppy.htb/DEV -U levi.james
+Password for [WORKGROUP\levi.james]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                  DR        0  Sun Mar 23 03:07:57 2025
+  ..                                  D        0  Sat Mar  8 11:52:57 2025
+  KeePassXC-2.7.9-Win64.msi           A 34394112  Sun Mar 23 03:09:12 2025
+  Projects                            D        0  Sat Mar  8 11:53:36 2025
+  recovery.kdbx                       A     2677  Tue Mar 11 22:25:46 2025
+
+                5080575 blocks of size 4096. 1639843 blocks available
+smb: \>
+```
